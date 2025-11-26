@@ -11,8 +11,11 @@
       "prefix": "app",
       "architect": {
         "build": {
+          "baseHref": "/icc-ppw-u2-03ComponentesEstilo/",
+          "deployUrl": "/icc-ppw-u2-03ComponentesEstilo/",
           "builder": "@angular/build:application",
           "options": {
+            
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -24,6 +27,8 @@
             "styles": [
               "src/styles.css"
             ]
+            
+            
           },
           "configurations": {
             "production": {
@@ -44,7 +49,13 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

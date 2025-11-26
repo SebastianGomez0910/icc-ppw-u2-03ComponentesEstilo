@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 })
 export class SignalBoxComponent { 
   valor = signal<number>(0);
+  progreso = signal<number>(0);
 
   cambiarValor(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -21,6 +22,6 @@ export class SignalBoxComponent {
     const nuevoValor = Number(input.value);
     
     // Actualizamos la señal
-    this.valor.set(nuevoValor);
+    this.progreso.set(nuevoValor);
   }
 }

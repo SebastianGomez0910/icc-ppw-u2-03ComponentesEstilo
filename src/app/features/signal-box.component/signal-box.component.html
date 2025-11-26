@@ -34,15 +34,15 @@
     <div class="relative w-80 h-6 bg-gray-200 rounded-full overflow-hidden shadow-inner">
         <div
             class="h-full transition-all duration-500"
-            [style.width.%]="valor()"
-            [class.bg-red-500]="valor() < 40"
-            [class.bg-yellow-500]="valor() >= 40 && valor()<70"
-            [class.bg-green-500]="valor() >= 70"
+            [style.width.%]="progreso()"
+            [class.bg-red-500]="progreso() < 40"
+            [class.bg-yellow-500]="progreso() >= 40 && progreso()<70"
+            [class.bg-green-500]="progreso() >= 70"
         ></div>
     </div>
 
     <p class="text-center font-bold text-xl mt-4 text-gray-800">
-        Progreso: {{ valor() }}%
+        Progreso: {{ progreso() }}%
     </p>
 </section>
 </section>

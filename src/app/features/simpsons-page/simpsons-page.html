@@ -1,0 +1,77 @@
+<section class="p-8">
+  
+  <app-breadcrumbs
+  [items]="[
+    { label: 'Inicio', link: '/'},
+    { label: 'Simpsons', link: '/simpsons'},
+    { label: 'Personajes'}
+  ]"/>
+
+  <app-hero-simpsons 
+    [simpsonsCount]="simpsonsResource()?.count ?? 0"
+    [totalPages]="totalPages()">
+  </app-hero-simpsons>
+  
+  <!-- Spinner de carga -->
+  @if (!simpsonsResource()) {
+    <div class="flex justify-center items-center h-64">
+      <span class="loading loading-spinner loading-lg"></span>
+    </div>
+  }
+
+  <!-- Tabla -->
+  @if (simpsonsResource()) {
+
+    <!-- Paginación -->
+     @if (totalPages() > 0) {
+    <div class="flex gap-2 items-center h-20 mb-4 bg-white px-4 rounded-lg shadow-sm">
+                
+    <app-pagination-component
+    [pages]="totalPages()"
+    [currentPage]="paginationService.currentPage()"/>
+              
+    <div class="flex flex-1"></div>
+    </div>
+  }
+
+    <!-- Tabla de personajes -->
+    <div class="overflow-x-auto">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Ocupación</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (personaje of simpsonsResource()?.results ?? []; track personaje.id) {
+            <tr>
+              <td>{{ personaje.id }}</td>
+              <td>{{ personaje.name }}</td>
+              <td>{{ personaje.occupation }}</td>
+              <td>
+                <span class="badge badge-{{ personaje.status === 'Alive' ? 'success' : 'error' }}">
+                  {{ personaje.status }}
+                </span>
+              </td>
+
+              <td>
+                <a
+                  [routerLink]="['/simpsons', personaje.id]"
+                  class="btn btn-sm btn-primary"
+                >
+                  Ver Detalle
+                </a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+  }
+</section>
